@@ -6,12 +6,18 @@ import java.util.Random;
 
 public class WebALC {
 
-	public static final String BANCO_DE_DADOS = "~/alc/alc.bd";
-	public static final String CLIENTES = "~/alc/clientes.txt";
-	public static final String OSM = "~/alc/osm.txt";
+	public static String CLIENTES;
+	public static String OSM;
 	
 	private Point2D alc; 
 	private Point2D minsum;
+	private Point2D maxsum;
+	
+	public WebALC(String clientes, String osm) {
+		
+		CLIENTES = clientes;
+		OSM = osm;
+	}
 	
 	public void init(String amenity){
 		Parser parser = new Parser();
