@@ -64,33 +64,21 @@ public class VisualizarPontos extends HttpServlet {
 		String clientes = getServletContext().getRealPath("WEB-INF/arquivos/clientes.txt");
 		salvar(nome, email, db);
 		carregarHtml(path);
-		//WebALC alc = new WebALC(clientes, osm);
-		//alc.init(amenity);
+		WebALC alc = new WebALC(clientes, osm);
+		alc.init(amenity);
 		
+		String marker_alc = "var marker = new google.maps.Marker({position: "
+				+ "{lat:"+alc.getAlc().getX()+", lng:"+alc.getAlc().getY()+"},map: map, label: \"1\"});";
+		String marker_minsum = "var marker = new google.maps.Marker({position: "
+				+ "{lat:"+alc.getMinsum().getX()+", lng:"+alc.getMinsum().getY()+"},map: map, label: \"2\"});";
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println(comeco);
-		
+		out.print(marker_alc);
+		out.println(marker_minsum);
 		//aqui vai ficar o código dos marcadores hehe
 		out.print(fim);
-		/*out.println("<html>");
-	    out.println("<head>");
-	    out.println("<meta charset=\"utf-8\">");
-	    out.println("<title>Localização Ideal no Espaço Euclidiano</title>");
-	    out.println("<style> #map {height: 400px;width: 100%;}</style>");
-	    out.println("</head>");
-	    out.println("<h1>Localização Ideal no Espaço Euclidiano</h1>");
-	    out.println("<body align=\"justify\">");
-	    out.println("Entre esses três locais candidatos qual você acha melhor para instalar um(a) novo(a)");
-	    out.println(amenity+":");
-	    out.print("<form action=\"VisualizarPontos\" method=\"POST\">");
-	    out.println("<input type=\"radio\" name=\"algoritmo\" value=\"0\" checked> ponto 1<br>");
-	    out.println("<input type=\"radio\" name=\"algoritmo\" value=\"1\"> ponto 2<br>");
-	    out.println("<input type=\"radio\" name=\"algoritmo\" value=\"2\"> ponto 3");
-	    out.println("<input type=\"submit\" value=\"gravar\">");
-	    out.println("</form>");
-	    out.println("</body>");
-	    out.println("</html>");*/
+		out.close();
 	}
 	
 	
