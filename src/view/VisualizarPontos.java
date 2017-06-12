@@ -71,11 +71,14 @@ public class VisualizarPontos extends HttpServlet {
 				+ "{lat:"+alc.getAlc().getX()+", lng:"+alc.getAlc().getY()+"},map: map, label: \"1\"});";
 		String marker_minsum = "var marker = new google.maps.Marker({position: "
 				+ "{lat:"+alc.getMinsum().getX()+", lng:"+alc.getMinsum().getY()+"},map: map, label: \"2\"});";
+		String marker_minmax = "var marker = new google.maps.Marker({position: "
+				+ "{lat:"+alc.getMinmax().getX()+", lng:"+alc.getMinmax().getY()+"},map: map, label: \"3\"});";
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println(comeco);
 		out.print(marker_alc);
 		out.println(marker_minsum);
+		out.println(marker_minmax);
 		//aqui vai ficar o código dos marcadores hehe
 		out.print(fim);
 		out.close();

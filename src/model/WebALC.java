@@ -12,6 +12,7 @@ public class WebALC {
 	private Point2D alc; 
 	private Point2D minsum;
 	private Point2D maxsum;
+	private Point2D minmax;
 	
 	public WebALC(String clientes, String osm) {
 		
@@ -35,6 +36,7 @@ public class WebALC {
         
 		alc = ALC.getLC(candidatos, parser.getFacilities(), parser.getClientes());
 		minsum = ALC.getMinSum(candidatos, parser.getFacilities(), parser.getClientes());
+		minmax = ALC.getMinMax(candidatos, parser.getFacilities(), parser.getClientes());
 	}
 
 	public Point2D getAlc() {
@@ -47,6 +49,10 @@ public class WebALC {
 
 	public Point2D getMaxsum() {
 		return maxsum;
+	}
+
+	public Point2D getMinmax() {
+		return minmax;
 	}
 	
 

@@ -67,5 +67,37 @@ public class ALC {
 		return melhor_ponto; 
 		
 	}
+	
+	public static Point2D getMinMax(Collection<Node> pontos, Collection<Node> faclities, Collection<Tweet> clientes){
+		double melhor_ponto_wad = 0;
+		Point2D melhor_ponto = null; 
+		double wad;
+		double dist_ponto_cliente;
+		double dist_facility_cliente;
+		for (Point2D ponto : pontos) {
+			wad = 0; 
+			for (Point2D cliente : clientes) {
+				dist_ponto_cliente = Point2D.distance(ponto.getX(), ponto.getY(), cliente.getX(), cliente.getY());
+				for (Point2D facility : faclities) {
+					dist_facility_cliente = Point2D.distance(facility.getX(), facility.getY(), cliente.getX(), cliente.getY());
+					
+					if(dist_ponto_cliente < dist_facility_cliente){
+						wad = dist_ponto_cliente; //considerando w(c) = 1 
+					}
+					else{
+						wad = dist_facility_cliente;
+					}
+				}
+			}
+		
+		if(wad > melhor_ponto_wad){
+			melhor_ponto_wad = wad;
+			melhor_ponto = ponto;
+		}
+		}
+		
+		return melhor_ponto; 
+		
+	}
 }
 
