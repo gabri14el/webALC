@@ -20,6 +20,10 @@ public class WebALC {
 		OSM = osm;
 	}
 	
+	
+	public boolean minMaxEqualsMinSum(){
+		return minsum.equals(minmax);
+	}
 	public void init(String amenity){
 		Parser parser = new Parser();
 		parser.init(OSM, amenity);

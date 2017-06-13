@@ -29,6 +29,7 @@ import model.WebALC;
 public class VisualizarPontos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String comeco;
+	String meio; 
 	String fim; 
     /**
      * @see HttpServlet#HttpServlet()
@@ -76,9 +77,20 @@ public class VisualizarPontos extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println(comeco);
+		//se o minmax e o minsum forem iguais
+		if(!alc.minMaxEqualsMinSum())
+			out.println("<input type=\"hidden\" name=\"minMaxEqualsMinSum\" value=\"false\">");
+		else
+			out.println("<input type=\"hidden\" name=\"minMaxEqualsMinSum\" value=\"true\">");
+		
+		out.println(meio);
 		out.print(marker_alc);
 		out.println(marker_minsum);
-		out.println(marker_minmax);
+		//se o minmax e o minsum forem iguais 
+		if(!alc.minMaxEqualsMinSum()){
+			out.println(marker_minmax);
+		}
+			
 		//aqui vai ficar o código dos marcadores hehe
 		out.print(fim);
 		out.close();
@@ -107,6 +119,16 @@ public class VisualizarPontos extends HttpServlet {
 			 }
 			 comeco.close();
 			 this.fim = buf.toString();
+			 
+			 
+			 BufferedReader meio = new BufferedReader(new FileReader(path+"/visualizar_pontos_meio.html"));
+			 buf = new StringBuffer();
+			 while (meio.ready()) {
+			  str = meio.readLine();
+			  buf.append(str);
+			 }
+			 comeco.close();
+			 this.meio = buf.toString();
 			  } catch (IOException e) {
 			 e.printStackTrace();
 			 
